@@ -1,0 +1,102 @@
+{
+	"variables": [],
+	"info": {
+		"name": "InterestCalc",
+		"_postman_id": "0c9bd802-d507-951c-083b-1f696104ad65",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Calcula juros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = responseBody === \"105.1\";"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "http://localhost:5000/calculajuros?valorinicial=100&meses=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"calculajuros"
+					],
+					"query": [
+						{
+							"key": "valorinicial",
+							"value": "100",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "meses",
+							"value": "5",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Calcula juros alternativa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = responseBody === \"105.1\";"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5000/interestcalc/100/5/0.01",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Mostra o código",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body is correct\"] = responseBody === \"https://github.com/ocult/interestcalctest\";"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:5000/showmethecode",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

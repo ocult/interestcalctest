@@ -25,16 +25,15 @@ using IO.Swagger.Attributes;
 using Test.Models.Lib;
 
 namespace IO.Swagger.Controllers
-{ 
+{
     /// <summary>
     /// Controler principal e único
     /// </summary>
     public class DefaultApiController : Controller
-    { 
+    {
         /// <summary>
         /// Calcula juros
         /// </summary>
-        
         /// <param name="valorinicial">Valor inicial a ser usado no cálculo</param>
         /// <param name="meses">Número de meses</param>
         /// <response code="200">Status 200</response>
@@ -44,25 +43,14 @@ namespace IO.Swagger.Controllers
         [SwaggerOperation("CalculajurosGet")]
         [SwaggerResponse(statusCode: 200, type: typeof(decimal?), description: "Status 200")]
         public virtual IActionResult CalculajurosGet([FromQuery]decimal? valorinicial, [FromQuery]int? meses)
-        { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(decimal?));
-            InterestCalc calc = new InterestCalc(valorinicial.Value, meses.Value);            
-
-            string exampleJson = null;
-            exampleJson = calc.Calc().ToString();
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<decimal?>(exampleJson)
-            : default(decimal?);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+        {
+            InterestCalc calc = new InterestCalc(valorinicial.Value, meses.Value);
+            return StatusCode(200, calc.Calc());
         }
 
         /// <summary>
         /// Calcula os juros
         /// </summary>
-        
         /// <param name="initialValue">Valor inicial</param>
         /// <param name="months">Número de meses</param>
         /// <param name="interest">Taxa de juros ao mês</param>
@@ -73,45 +61,21 @@ namespace IO.Swagger.Controllers
         [SwaggerOperation("InterestcalcInitialValueMonthsInterestGet")]
         [SwaggerResponse(statusCode: 200, type: typeof(decimal?), description: "Status 200")]
         public virtual IActionResult InterestcalcInitialValueMonthsInterestGet([FromRoute][Required]decimal? initialValue, [FromRoute][Required]int? months, [FromRoute][Required]decimal? interest)
-        { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(decimal?));
-
+        {
             InterestCalc calc = new InterestCalc(initialValue.Value, months.Value, interest.Value);
-
-            string exampleJson = null;
-            exampleJson = calc.Calc().ToString();
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<decimal?>(exampleJson)
-            : default(decimal?);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+            return StatusCode(200, calc.Calc());
         }
 
         /// <summary>
         /// Mostra o fonte
         /// </summary>
-        
+
         /// <response code="200">Status 200</response>
         [HttpGet]
         [Route("/showmethecode")]
         [ValidateModelState]
         [SwaggerOperation("ShowmethecodeGet")]
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "Status 200")]
-        public virtual IActionResult ShowmethecodeGet()
-        { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(string));
-
-            string exampleJson = null;
-            exampleJson = "https://github.com/ocult/interestcalctest";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<string>(exampleJson)
-            : default(string);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
+        public virtual IActionResult ShowmethecodeGet() => StatusCode(200, "https://github.com/ocult/interestcalctest");
     }
 }
