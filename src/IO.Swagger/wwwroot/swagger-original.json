@@ -1,0 +1,106 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Teste simples de API swagger in .net core.",
+    "version" : "1.0.0",
+    "title" : "interestcalctest",
+    "contact" : {
+      "name" : "Anderson Jordão Marques",
+      "url" : "https://github.com/ocult",
+      "email" : "anjomar@gmail.com"
+    }
+  },
+  "host" : "localhost:5000",
+  "schemes" : [ "http" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/calculajuros" : {
+      "get" : {
+        "summary" : "Calcula juros",
+        "parameters" : [ {
+          "name" : "valorinicial",
+          "in" : "query",
+          "description" : "Valor inicial a ser usado no cálculo",
+          "required" : false,
+          "type" : "number",
+          "x-example" : 100.0
+        }, {
+          "name" : "meses",
+          "in" : "query",
+          "description" : "Número de meses",
+          "required" : false,
+          "type" : "number",
+          "x-example" : 1.0
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "number"
+            },
+            "examples" : {
+              "application/json" : 101.5
+            }
+          }
+        }
+      }
+    },
+    "/showmethecode" : {
+      "get" : {
+        "summary" : "Mostra o fonte",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "string"
+            },
+            "examples" : {
+              "application/json" : "http://github.com/username/repo"
+            }
+          }
+        }
+      }
+    },
+    "/interestcalc/{initialValue}/{months}/{interest}" : {
+      "get" : {
+        "summary" : "Calcula os juros",
+        "parameters" : [ {
+          "name" : "initialValue",
+          "in" : "path",
+          "description" : "Valor inicial",
+          "required" : true,
+          "type" : "number",
+          "x-example" : 100.0
+        }, {
+          "name" : "months",
+          "in" : "path",
+          "description" : "Número de meses",
+          "required" : true,
+          "type" : "integer",
+          "x-example" : 1
+        }, {
+          "name" : "interest",
+          "in" : "path",
+          "description" : "Taxa de juros ao mês",
+          "required" : true,
+          "type" : "number",
+          "x-example" : 0.1
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "number"
+            },
+            "examples" : {
+              "application/json" : 101.5
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : { }
+}
